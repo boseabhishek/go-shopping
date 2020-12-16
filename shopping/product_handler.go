@@ -1,8 +1,8 @@
 package shopping
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 
 	"github.com/gorilla/mux"
 )

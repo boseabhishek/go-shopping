@@ -51,7 +51,7 @@ func Test_View_List_Of_Products(t *testing.T) {
 		handler.ServeHTTP(rr, req)
 
 		Convey("When I view the home page", func() {
-			ps := make([]*shopping.Product, 2)
+			var ps []*shopping.Product
 			err := json.Unmarshal([]byte(rr.Body.String()), &ps)
 			if err != nil {
 				t.Errorf("error converting to json: %v", err)
@@ -69,7 +69,7 @@ func Test_View_List_Of_Products(t *testing.T) {
 }
 
 func setup(verb, url string, body io.Reader, t *testing.T) (*http.Request, *httptest.ResponseRecorder) {
-	req, err := http.NewRequest(http.MethodGet, "/products", body)
+	req, err := http.NewRequest(http.MethodGet, url, body)
 	if err != nil {
 		t.Errorf("error creating request %v", err)
 	}
@@ -168,7 +168,6 @@ func Test_Add_Item_To_Basket(t *testing.T) {
 	})
 
 }
-
 
 func Test_Remove_Item_From_Basket(t *testing.T) {
 
